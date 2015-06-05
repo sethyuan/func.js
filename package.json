@@ -1,0 +1,39 @@
+{
+  "name": "func",
+  "version": "0.1.0",
+  "description": "An ES6 library offering some functional features.",
+  "main": "./lib/func.js",
+  "scripts": {
+    "test": "jasmine"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sethyuan/func.js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sethyuan/func.js/issues",
+    "email": "sethyuan@gmail.com"
+  },
+  "keywords": [
+  ],
+  "author": {
+    "name": "sethyuan",
+    "email": "sethyuan@gmail.com"
+  },
+  "engines": {
+    "node": ">=0.10"
+  },
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "dependencies": {
+    "babel-runtime": "latest"
+  },
+  "devDependencies": {
+    "gulp": "latest",
+    "del": "latest",
+    "gulp-babel": "latest",
+    "gulp-sourcemaps": "latest",
+    "gulp-changed": "latest",
+    "source-map-support": "latest"
+  }
+}
