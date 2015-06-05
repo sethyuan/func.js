@@ -10,7 +10,21 @@ $ npm install func.js
 
 ## Example
 
+```js
+import {inc} from "func.js"
+import {iterate, map, take} from "func.js/lib/seq"
+
+const infiniteNums = iterate(inc, 0);
+const tripled = map(x => 3 * x, infiniteNums);
+
+for (let x of take(10, tripled)) {
+  console.log(x);
+}
+```
+
 ## API
+
+Check the unit tests under `src/test/`
 
 ## License
 
