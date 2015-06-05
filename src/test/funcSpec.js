@@ -1,12 +1,18 @@
 require("source-map-support").install();
 
 import {
-  isPos, isNeg, isZero, isOne,
+  identity, isPos, isNeg, isZero, isOne,
   complement, comp, constantly,
   inc, dec, juxt, range, min, max
 } from "../lib/func"
 
 describe("func", () => {
+  it("identity", () => {
+    expect(identity(1)).toBe(1);
+    const arr = [1];
+    expect(identity(arr)).toBe(arr);
+  });
+
   it("isPos", () => {
     expect(isPos(1)).toBe(true);
     expect(isPos(-1)).toBe(false);
