@@ -1,6 +1,6 @@
 require("source-map-support").install();
 
-import {inc, dec, range} from "../lib/func"
+import {inc, range} from "../lib/func"
 import {
   seq, take, drop, iterate, map, filter,
   concat, mapcat, partition, partitionAll,
