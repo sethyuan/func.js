@@ -110,3 +110,7 @@ export function max(xs, f=identity) {
   }
   return res;
 }
+
+export function pipe(x, ...fs) {
+  return fs.reduce((r, f) => f(r), x);
+}

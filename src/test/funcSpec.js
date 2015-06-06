@@ -3,7 +3,7 @@ require("source-map-support").install();
 import {
   identity, isPos, isNeg, isZero, isOne,
   complement, comp, constantly,
-  inc, dec, juxt, range, min, max
+  inc, dec, juxt, range, min, max, pipe
 } from "../lib/func"
 
 describe("func", () => {
@@ -116,5 +116,15 @@ describe("func", () => {
 
   it("max length of an array", () => {
     expect(max(["foo", "hello", "x", "abcd"], x => x.length)).toBe(5);
+  });
+
+  it("pipe", () => {
+    const arr = pipe(
+      [1, 2, 3, 4],
+      _ => _.map(x => 2*x),
+      _ => _.filter(x => x % 4 === 0),
+      _ => new Array(_.length)
+    );
+    expect(arr.length).toBe(2);
   });
 });
