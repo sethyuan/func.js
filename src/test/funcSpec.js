@@ -102,19 +102,19 @@ describe("func", () => {
     expect(Array.from(range(1, 3, 0))).toEqual([]);
   });
 
-  it("min array of numbers", () => {
+  it("min number of an array", () => {
     expect(min([4, 3, 1, 2])).toBe(1);
   });
 
-  it("min array using length", () => {
+  it("min length of an array", () => {
     expect(min(["hello", "foo", "x", "abcd"], x => x.length)).toBe(1);
   });
 
-  it("max array of numbers", () => {
+  it("max number of an array", () => {
     expect(max([4, 3, 1, 2, 5])).toBe(5);
   });
 
-  it("max array using length", () => {
+  it("max length of an array", () => {
     expect(max(["foo", "hello", "x", "abcd"], x => x.length)).toBe(5);
   });
 });
