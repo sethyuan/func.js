@@ -11,11 +11,13 @@ $ npm install func.js
 ## Example
 
 ```js
-import {inc} from "func.js"
+import {inc, pipe} from "func.js"
 import {iterate, map, take} from "func.js/lib/seq"
 
-const infiniteNums = iterate(inc, 0);
-const tripled = map(x => 3 * x, infiniteNums);
+const tripled = pipe(
+  iterate(inc, 1),
+  _ => map(x => 3*x, _)
+);
 
 for (let x of take(10, tripled)) {
   console.log(x);
