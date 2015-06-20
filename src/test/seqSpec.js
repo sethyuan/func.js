@@ -2,7 +2,7 @@ require("source-map-support").install();
 
 import {inc, range} from "../lib/func"
 import {
-  seq, take, drop, iterate, map, filter,
+  seq, take, drop, iterate, map, filter, reduce,
   concat, mapcat, partition, partitionAll,
   interleave, splitAt
 } from "../lib/seq"
@@ -44,6 +44,22 @@ describe("seq", () => {
     const odds = filter(x => x % 2 === 1, numbers);
     const arr = Array.from(take(3, odds));
     expect(arr).toEqual([1, 3, 5]);
+  });
+
+  it("a sum with reduce", () => {
+    function add(x, y) {
+      return x + y;
+    }
+    const numbers = range(1, 4);
+    expect(reduce(add, numbers)).toBe(10);
+  });
+
+  it("count of characters using reduce with an initial value", () => {
+    function addLength(len, x) {
+      return len + x.length;
+    }
+    const words = ["hello", "world", "!"];
+    expect(reduce(addLength, 0, words)).toBe(11);
   });
 
   it("concat [1, 2] and [3, 4] gives [1, 2, 3, 4]", () => {

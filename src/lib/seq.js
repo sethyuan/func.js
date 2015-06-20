@@ -46,6 +46,15 @@ export function* filter(pred, generator) {
   }
 }
 
+export function reduce(f, a, b=undefined) {
+  const generator = (b === undefined ? a : b);
+  let res = (b === undefined ? generator.next().value : a);
+  for (let x of generator) {
+    res = f(res, x);
+  }
+  return res;
+}
+
 export function* concat(...generators) {
   for (let gen of generators) {
     for (let x of gen) {

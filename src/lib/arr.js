@@ -16,6 +16,15 @@ export function filter(pred, arr) {
   return arr.filter(pred);
 }
 
+export function reduce(f, a, b=undefined) {
+  const arr = (b === undefined ? a : b);
+  if (b === undefined) {
+    return arr.reduce(f);
+  } else {
+    return arr.reduce(f, a);
+  }
+}
+
 export function concat(...arrs) {
   // Functional implementation:
   // return arrs.reduce((a, b) => a.concat(b));

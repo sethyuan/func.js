@@ -1,7 +1,7 @@
 require("source-map-support").install();
 
 import {
-  take, drop, map, filter,
+  take, drop, map, filter, reduce,
   concat, mapcat, partition, partitionAll,
   interleave, splitAt
 } from "../lib/arr"
@@ -25,6 +25,22 @@ describe("func", () => {
 
   it("filter odd ones", () => {
     expect(filter(x => x % 2 === 1, [1, 2, 3, 4, 5, 6])).toEqual([1, 3, 5]);
+  });
+
+  it("a sum with reduce", () => {
+    function add(x, y) {
+      return x + y;
+    }
+    const numbers = [1, 2, 3, 4];
+    expect(reduce(add, numbers)).toBe(10);
+  });
+
+  it("count of characters using reduce with an initial value", () => {
+    function addLength(len, x) {
+      return len + x.length;
+    }
+    const words = ["hello", "world", "!"];
+    expect(reduce(addLength, 0, words)).toBe(11);
   });
 
   it("concat [1, 2] and [3, 4] gives [1, 2, 3, 4]", () => {
