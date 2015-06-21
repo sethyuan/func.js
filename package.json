@@ -1,6 +1,6 @@
 {
   "name": "func.js",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "An ES6 library offering some functional features.",
   "main": "./lib/func.js",
   "scripts": {
