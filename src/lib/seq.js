@@ -119,13 +119,21 @@ export function* partitionAll(n, generator) {
 export function* interleave(...generators) {
   if (generators.length === 0) throw new Error("no generators passed in.");
 
-  let done = false;
+  let finished = false;
 
-  while (!done) {
-    let res = generators.map(gen => gen.next());
-    done = res.reduce((prevDone, {done: done}) => prevDone || done, false);
+  function nextItems(gen) {
+    return gen.next();
+  }
 
-    if (!done) {
+  function isDone(prevDone, {done}) {
+    return prevDone || done;
+  }
+
+  while (!finished) {
+    let res = generators.map(nextItems);
+    finished = res.reduce(isDone, false);
+
+    if (!finished) {
       for (let {value: x} of res) {
         yield x;
       }

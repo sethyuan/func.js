@@ -1,4 +1,4 @@
-import {min} from "./func"
+import {min} from "./func";
 
 export function take(n, arr) {
   return arr.slice(0, n);

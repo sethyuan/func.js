@@ -4,7 +4,7 @@ import {
   identity, isPos, isNeg, isZero, isOne,
   complement, comp, constantly,
   inc, dec, juxt, range, min, max, pipe
-} from "../lib/func"
+} from "../lib/func";
 
 describe("func", () => {
   it("identity", () => {
@@ -77,9 +77,9 @@ describe("func", () => {
   });
 
   it("range with 0 arg produce an infinite sequence starting from 0", () => {
-    let i = 1;
-    for (let x of range()) {
-      if (i++ > 100) break;
+    const nums = range();
+    for (let i = 0; i < 100; i++) {
+      nums.next();
     }
   });
 
@@ -121,7 +121,7 @@ describe("func", () => {
   it("pipe", () => {
     const arr = pipe(
       [1, 2, 3, 4],
-      _ => _.map(x => 2*x),
+      _ => _.map(x => 2 * x),
       _ => _.filter(x => x % 4 === 0),
       _ => new Array(_.length)
     );

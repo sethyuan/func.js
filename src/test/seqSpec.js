@@ -1,11 +1,11 @@
 require("source-map-support").install();
 
-import {inc, range} from "../lib/func"
+import {inc, range} from "../lib/func";
 import {
   seq, take, drop, iterate, map, filter, reduce,
   concat, mapcat, partition, partitionAll,
   interleave, splitAt
-} from "../lib/seq"
+} from "../lib/seq";
 
 describe("seq", () => {
   it("take 3", () => {

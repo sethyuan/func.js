@@ -4,7 +4,7 @@ import {
   take, drop, map, filter, reduce,
   concat, mapcat, partition, partitionAll,
   interleave, splitAt
-} from "../lib/arr"
+} from "../lib/arr";
 
 describe("func", () => {
   it("take 3", () => {

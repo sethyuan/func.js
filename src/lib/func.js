@@ -93,7 +93,7 @@ export function min(xs, f=identity) {
   let res;
   for (let x of xs) {
     let val = f(x);
-    if (res == undefined || val < res) {
+    if (res === undefined || val < res) {
       res = val;
     }
   }
@@ -104,7 +104,7 @@ export function max(xs, f=identity) {
   let res;
   for (let x of xs) {
     let val = f(x);
-    if (res == undefined || val > res) {
+    if (res === undefined || val > res) {
       res = val;
     }
   }
