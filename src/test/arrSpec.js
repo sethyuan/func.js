@@ -23,6 +23,13 @@ describe("func", () => {
     expect(map(x => x * 2, [1, 2, 3])).toEqual([2, 4, 6]);
   });
 
+  it("key value pair using map", () => {
+    const keys = ["k1", "k2"];
+    const values = ["v1", "v2"];
+    const pairs = map((x, y) => [x, y], keys, values);
+    expect(pairs).toEqual([["k1", "v1"], ["k2", "v2"]]);
+  });
+
   it("filter odd ones", () => {
     expect(filter(x => x % 2 === 1, [1, 2, 3, 4, 5, 6])).toEqual([1, 3, 5]);
   });
@@ -64,6 +71,16 @@ describe("func", () => {
       "love",
       "front",
       "end"
+    ]);
+  });
+
+  it("construct key-value pairs using mapcat", () => {
+    const keys = ["k1", "k2"];
+    const values = ["v1", "v2"];
+    const pairs = mapcat((k, v) => [k, v], keys, values);
+    expect(Array.from(pairs)).toEqual([
+      "k1", "v1",
+      "k2", "v2"
     ]);
   });
 

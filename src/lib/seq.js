@@ -1,13 +1,13 @@
-export function* seq(arr) {
-  for (let x of arr) {
+export function* seq(xs) {
+  for (let x of xs) {
     yield x;
   }
 }
 
-export function* take(n, generator) {
+export function* take(n, s) {
   if (n <= 0) return;
 
-  for (let x of generator) {
+  for (let x of s) {
     if (n-- > 0) {
       yield x;
       if (n <= 0) break;
@@ -15,11 +15,11 @@ export function* take(n, generator) {
   }
 }
 
-export function* drop(n, generator) {
+export function* drop(n, s) {
   if (n <= 0) return;
 
   let i = 0;
-  for (let x of generator) {
+  for (let x of s) {
     if (i >= n) yield x;
     else i++;
   }
@@ -34,50 +34,76 @@ export function* iterate(f, x) {
   }
 }
 
-export function* map(f, generator) {
-  for (let x of generator) {
-    yield f(x);
+export function* map(f, ...ss) {
+  if (ss.length === 0) throw new Error("no sequences passed in.");
+
+  if (ss.length === 1) {
+    for (let x of seq(ss[0])) {
+      yield f(x);
+    }
+    return;
+  }
+
+  ss = ss.map(seq);
+
+  let finished = false;
+
+  function nextItems(s) {
+    return s.next();
+  }
+
+  function isDone(prevDone, {done}) {
+    return prevDone || done;
+  }
+
+  function value(x) {
+    return x.value;
+  }
+
+  while (!finished) {
+    let res = ss.map(nextItems);
+    finished = res.reduce(isDone, false);
+
+    if (!finished) {
+      yield f(...res.map(value));
+    }
   }
 }
 
-export function* filter(pred, generator) {
-  for (let x of generator) {
+export function* filter(pred, s) {
+  for (let x of s) {
     if (pred(x)) yield x;
   }
 }
 
 export function reduce(f, a, b=undefined) {
-  const generator = (b === undefined ? a : b);
-  let res = (b === undefined ? generator.next().value : a);
-  for (let x of generator) {
+  const s = seq(b === undefined ? a : b);
+  let res = (b === undefined ? s.next().value : a);
+  for (let x of s) {
     res = f(res, x);
   }
   return res;
 }
 
-export function* concat(...generators) {
-  for (let gen of generators) {
-    for (let x of gen) {
+export function* concat(...ss) {
+  for (let s of ss) {
+    for (let x of s) {
       yield x;
     }
   }
 }
 
-export function* mapcat(f, generator) {
-  for (let x of generator) {
-    for (let y of f(x)) {
-      yield y;
-    }
-  }
+export function* mapcat(f, ...ss) {
+  yield* concat(...map(f, ...ss));
 }
 
-export function* partition(n, generator) {
+export function* partition(n, s) {
   if (n <= 0) return;
 
   let i = 0;
   let buffer = new Array(n);
 
-  for (let x of generator) {
+  for (let x of s) {
     if (i < n) {
       buffer[i] = x;
       i++;
@@ -91,13 +117,13 @@ export function* partition(n, generator) {
   }
 }
 
-export function* partitionAll(n, generator) {
+export function* partitionAll(n, s) {
   if (n <= 0) return;
 
   let i = 0;
   let buffer = new Array(n);
 
-  for (let x of generator) {
+  for (let x of s) {
     if (i < n) {
       buffer[i] = x;
       i++;
@@ -116,13 +142,15 @@ export function* partitionAll(n, generator) {
   }
 }
 
-export function* interleave(...generators) {
-  if (generators.length === 0) throw new Error("no generators passed in.");
+export function* interleave(...ss) {
+  if (ss.length === 0) throw new Error("no sequences passed in.");
+
+  ss = ss.map(seq);
 
   let finished = false;
 
-  function nextItems(gen) {
-    return gen.next();
+  function nextItems(s) {
+    return s.next();
   }
 
   function isDone(prevDone, {done}) {
@@ -130,7 +158,7 @@ export function* interleave(...generators) {
   }
 
   while (!finished) {
-    let res = generators.map(nextItems);
+    let res = ss.map(nextItems);
     finished = res.reduce(isDone, false);
 
     if (!finished) {
@@ -141,6 +169,7 @@ export function* interleave(...generators) {
   }
 }
 
-export function splitAt(n, generator) {
-  return [Array.from(take(n, generator)), generator];
+export function splitAt(n, s) {
+  s = seq(s);
+  return [Array.from(take(n, s)), s];
 }

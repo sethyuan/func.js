@@ -8,8 +8,27 @@ export function drop(n, arr) {
   return arr.slice(n);
 }
 
-export function map(f, arr) {
-  return arr.map(f);
+export function map(f, ...arrs) {
+  const n = arrs.length;
+
+  if (n === 0) throw new Error("no arrays passed in.");
+
+  if (n === 1) return arrs[0].map(f);
+
+  function nth(i) {
+    let ith = new Array(n);
+    for (let j = 0; j < n; j++) {
+      ith[j] = arrs[j][i];
+    }
+    return ith;
+  }
+
+  const shortestLen = min(arrs, arr => arr.length);
+  const res = new Array(shortestLen);
+  for (let i = 0; i < res.length; i++) {
+    res[i] = f(...nth(i));
+  }
+  return res;
 }
 
 export function filter(pred, arr) {
@@ -46,8 +65,8 @@ export function concat(...arrs) {
   return res;
 }
 
-export function mapcat(f, arr) {
-  return concat(...arr.map(f));
+export function mapcat(f, ...arrs) {
+  return concat(...map(f, ...arrs));
 }
 
 export function partition(n, arr) {
@@ -82,7 +101,7 @@ export function partitionAll(n, arr) {
 
 export function interleave(...arrs) {
   const n = arrs.length;
-  if (n === 0) throw new Error("no array passed in.");
+  if (n === 0) throw new Error("no arrays passed in.");
 
   const shortestLen = min(arrs, arr => arr.length);
   const res = new Array(shortestLen * n);
