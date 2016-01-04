@@ -168,8 +168,3 @@ export function* interleave(...ss) {
     }
   }
 }
-
-export function splitAt(n, s) {
-  s = seq(s);
-  return [Array.from(take(n, s)), s];
-}

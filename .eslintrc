@@ -4,10 +4,7 @@
     "babel"
   ],
   "env": {
-    "es6": true,
-    "node": true,
-    "browser": true,
-    "jasmine": true
+    "es6": true
   },
   "rules": {
     "object-shorthand": 0,

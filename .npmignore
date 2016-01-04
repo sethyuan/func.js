@@ -1,4 +1,3 @@
 test/
-src/
-spec/
+tests/
 gulpfile.js
