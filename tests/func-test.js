@@ -77,29 +77,29 @@ describe("func", () => {
     expect(oneTwoThree(0)).deep.equal([1, 2, 3]);
   });
 
-  it("range with 0 arg produce an infinite sequence starting from 0", () => {
+  xit("range with 0 arg produce an infinite sequence starting from 0", () => {
     const nums = range();
     for (let i = 0; i < 100; i++) {
       nums.next();
     }
   });
 
-  it("range with 1 arg n produce a sequence from 0 to n inclusive", () => {
+  xit("range with 1 arg n produce a sequence from 0 to n inclusive", () => {
     expect(Array.from(range(3))).deep.equal([0, 1, 2, 3]);
   });
 
-  it("range with 2 args produce a sequence from start to end inclusive", () => {
+  xit("range with 2 args produce a sequence from start to end inclusive", () => {
     expect(Array.from(range(1, 3))).deep.equal([1, 2, 3]);
   });
 
-  it("range with 3 args is like with 2 args but with stepping", () => {
+  xit("range with 3 args is like with 2 args but with stepping", () => {
     expect(Array.from(range(1, 7, 2))).deep.equal([1, 3, 5, 7]);
     expect(Array.from(range(1, 8, 2))).deep.equal([1, 3, 5, 7]);
     expect(Array.from(range(5, 0, -3))).deep.equal([5, 2]);
     expect(Array.from(range(5, -1, -3))).deep.equal([5, 2, -1]);
   });
 
-  it("step 0 produce nothing", () => {
+  xit("step 0 produce nothing", () => {
     expect(Array.from(range(1, 3, 0))).deep.equal([]);
   });
 

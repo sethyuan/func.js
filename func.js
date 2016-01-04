@@ -59,37 +59,37 @@ export function juxt(...fs) {
   }
 }
 
-export function* range(...args) {
-  let start, end, step;
-
-  switch (args.length) {
-  case 0:
-    start = 0;
-    while (true) yield start++;
-    break;
-  case 1:
-    [start, end, step] = [0, args[0], 1];
-    break;
-  case 2:
-    [start, end, step] = [...args, 1];
-    break;
-  default:
-    [start, end, step] = args;
-    break;
-  }
-
-  if (isPos(step)) {
-    while (start <= end) {
-      yield start;
-      start += step;
-    }
-  } else if (isNeg(step)) {
-    while (start >= end) {
-      yield start;
-      start += step;
-    }
-  }
-}
+// export function* range(...args) {
+//   let start, end, step;
+//
+//   switch (args.length) {
+//   case 0:
+//     start = 0;
+//     while (true) yield start++;
+//     break;
+//   case 1:
+//     [start, end, step] = [0, args[0], 1];
+//     break;
+//   case 2:
+//     [start, end, step] = [...args, 1];
+//     break;
+//   default:
+//     [start, end, step] = args;
+//     break;
+//   }
+//
+//   if (isPos(step)) {
+//     while (start <= end) {
+//       yield start;
+//       start += step;
+//     }
+//   } else if (isNeg(step)) {
+//     while (start >= end) {
+//       yield start;
+//       start += step;
+//     }
+//   }
+// }
 
 export function min(xs, f=identity) {
   let res;

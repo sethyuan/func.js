@@ -12,10 +12,10 @@ $ npm install func.js
 
 ```js
 import {inc, pipe} from "func.js"
-import {iterate, map, take} from "func.js/lib/seq"
+import {map, take} from "func.js/arr"
 
 const tripled = pipe(
-  iterate(inc, 1),
+  [1, 2, 3, 4, 5],
   _ => map(x => 3*x, _)
 );
 
